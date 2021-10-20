@@ -17,7 +17,9 @@ use App\Http\Controllers\BillingController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route:: group(['middleware'=> 'auth'],function(){
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('clients', ClientsController::class);
-Route::resource('billings', BillingController::class);
+    Route::resource('clients', ClientsController::class);
+    Route::resource('billings', BillingController::class);
+});
